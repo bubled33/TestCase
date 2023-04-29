@@ -3,6 +3,7 @@ import json
 import re
 from contextlib import suppress
 from enum import Enum
+from json import JSONDecodeError
 from re import Pattern
 from typing import List
 
@@ -59,7 +60,10 @@ class ResourceManager:
 
         # Получение и валидация данных на основе возвращаемого типа
         if resource.resource_type == ResourceTypes.json:
-            response_args = json.loads(await response.json())
+            try:
+                response_args = json.loads(await response.json())
+            except JSONDecodeError:
+                return
         else:
             response_data = (await response.read()).decode('utf-8')
             response_match = re.match(self._get_pattern(resource.resource_type), response_data)
