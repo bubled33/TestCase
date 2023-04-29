@@ -1,0 +1,12 @@
+[Database]
+host = 'localhost'
+port = 8080
+username = 'username'
+password = 'password'
+database = 'database'
+is_localhost = true
+[Server]
+host = 'localhost'
+port = 8080
+[Notify]
+url = 'http://localhost:8080/api/general/notify'
